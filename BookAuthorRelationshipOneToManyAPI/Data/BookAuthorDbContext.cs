@@ -1,4 +1,5 @@
-﻿using BookAuthorRelationshipOneToManyAPI.Entities;
+﻿using BookAuthorRelationshipOneToManyAPI.Exceptions;
+using BookAuthorRelationshipOneToManyAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookAuthorRelationshipOneToManyAPI.Data
@@ -8,7 +9,6 @@ namespace BookAuthorRelationshipOneToManyAPI.Data
 
         public DbSet<Book> Books => Set<Book>();
         public DbSet<Author> Authors => Set<Author>();
-
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

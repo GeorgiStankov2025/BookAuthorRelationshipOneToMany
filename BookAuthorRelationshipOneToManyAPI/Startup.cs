@@ -1,4 +1,8 @@
 ﻿using BookAuthorRelationshipOneToManyAPI.Data;
+using BookAuthorRelationshipOneToManyAPI.Entities;
+using BookAuthorRelationshipOneToManyAPI.Repositories;
+using BookAuthorRelationshipOneToManyAPI.Services;
+using BookAuthorRelationshipOneToManyAPI.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -13,7 +17,7 @@ namespace BookAuthorRelationshipOneToManyAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -21,40 +25,40 @@ namespace BookAuthorRelationshipOneToManyAPI
             services.AddSwaggerGen(c =>
             {
 
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ToDoList API", Version = "v1" });
-
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookAuthorAPI", Version = "v1" });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
 
             });
 
             services.AddDbContext<BookAuthorDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookServices, BookServices>();
+            services.AddScoped<IExceptionList, ExceptionList>();
 
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+     
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-               
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BuildingsAPI v1"));
+                app.UseSwagger();
+                app.UseStaticFiles();
+                app.UseDeveloperExceptionPage();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookAuthorAPI v1"));
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            
             app.UseDeveloperExceptionPage();
 
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            
         }
     }
 }

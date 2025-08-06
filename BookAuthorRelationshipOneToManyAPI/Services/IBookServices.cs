@@ -5,9 +5,9 @@ namespace BookAuthorRelationshipOneToManyAPI.Services
 {
     public interface IBookServices
     {
-        Task<Book> CreateBookService(Book book,Author author);
-        Task<Book> RemoveBookService(string name);
-        Task<Book> GetBookByNameService(string name);
+        Task<Book> CreateBookService(Book book);
+        Task<Book> RemoveBookService(Guid Id);
+        Task<Book> GetBookByNameService(Guid Id);
         Task<List<Book>> GetAllBooksService();
 
     }
