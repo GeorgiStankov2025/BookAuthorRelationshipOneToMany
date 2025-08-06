@@ -27,14 +27,8 @@ namespace BookAuthorRelationshipOneToManyAPI
 
             });
 
-
-
-
             services.AddDbContext<BookAuthorDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-
-          
-
 
         }
 

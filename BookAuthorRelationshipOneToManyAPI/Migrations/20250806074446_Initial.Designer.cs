@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookAuthorRelationshipOneToManyAPI.Migrations
 {
     [DbContext(typeof(BookAuthorDbContext))]
-    [Migration("20250805125248_UpdateEntities2")]
-    partial class UpdateEntities2
+    [Migration("20250806074446_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

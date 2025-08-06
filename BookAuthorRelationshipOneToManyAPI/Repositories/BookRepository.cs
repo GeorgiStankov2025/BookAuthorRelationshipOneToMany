@@ -1,35 +1,54 @@
 ﻿using BookAuthorRelationshipOneToManyAPI.Data;
 using BookAuthorRelationshipOneToManyAPI.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookAuthorRelationshipOneToManyAPI.Repositories
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository(BookAuthorDbContext context) : IBookRepository
     {
-        public Task<Book> CreateBook(Book book,Author author)
+        public async Task<Book> CreateBook(Book book,Author author)
         {
             
-           
+           await context.Books.AddAsync(book);
+
+           book.Author = author;
+
+           await context.SaveChangesAsync();
+
+           return book;
 
         }
 
-        public Task<Book> GetAllBooks()
+        public async Task<List<Book>> GetAllBooks()
         {
-            throw new NotImplementedException();
+            
+          return await context.Books.ToListAsync();
+            
         }
 
-        public Task<Book> GetBookByName(string Name)
+        public async Task<Book> GetBookByName(string Name)
         {
-            throw new NotImplementedException();
+
+            var book = await context.Books.FindAsync(Name);
+
+            book.Author = await context.Authors.FindAsync(book.AuthorId);
+
+            return book;
+
         }
 
-        public Task<Book> RemoveBook()
+        public async Task<Book> RemoveBook(string name)
         {
-            throw new NotImplementedException();
+            
+            var book= await GetBookByName(name);
+
+            context.Books.Remove(book);
+
+            await context.SaveChangesAsync();
+
+            return null;
+
         }
 
-        public Task<Book> UpdateBook()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

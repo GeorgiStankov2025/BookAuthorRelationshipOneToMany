@@ -24,9 +24,11 @@ namespace BookAuthorRelationshipOneToManyAPI.Migrations
 
             modelBuilder.Entity("BookAuthorRelationshipOneToManyAPI.Entities.Author", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -40,10 +42,11 @@ namespace BookAuthorRelationshipOneToManyAPI.Migrations
             modelBuilder.Entity("BookAuthorRelationshipOneToManyAPI.Entities.Book", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -58,6 +61,8 @@ namespace BookAuthorRelationshipOneToManyAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorId");
+
                     b.ToTable("Books");
                 });
 
@@ -65,7 +70,7 @@ namespace BookAuthorRelationshipOneToManyAPI.Migrations
                 {
                     b.HasOne("BookAuthorRelationshipOneToManyAPI.Entities.Author", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

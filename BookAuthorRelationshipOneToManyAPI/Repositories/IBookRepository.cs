@@ -6,10 +6,9 @@ namespace BookAuthorRelationshipOneToManyAPI.Repositories
     public interface IBookRepository
     {
 
-        Task<Book> CreateBook(Book book);
-        Task<Book> UpdateBook();
-        Task<Book> RemoveBook();
-        Task<Book> GetBookByName(string Name);
-        Task<Book> GetAllBooks();
+        Task<Book> CreateBook(Book book,Author author);
+        Task<Book> RemoveBook(string name);
+        Task<Book> GetBookByName(string name);
+        Task<List<Book>> GetAllBooks();
     }
 }

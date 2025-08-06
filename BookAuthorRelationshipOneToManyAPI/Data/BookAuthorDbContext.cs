@@ -21,10 +21,7 @@ namespace BookAuthorRelationshipOneToManyAPI.Data
                 .WithMany(b => b.Books)
                 .HasForeignKey(a=>a.AuthorId);
 
-            modelBuilder.Entity<Author>()
-                .HasMany(b => b.Books)
-                .WithOne(a => a.Author)
-                .HasForeignKey(a => a.Id);
+            
         }
 
     }
