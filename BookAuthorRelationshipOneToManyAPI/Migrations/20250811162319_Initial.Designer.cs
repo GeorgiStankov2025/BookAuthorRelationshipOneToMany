@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookAuthorRelationshipOneToManyAPI.Migrations
 {
     [DbContext(typeof(BookAuthorDbContext))]
-    [Migration("20250806074446_Initial")]
+    [Migration("20250811162319_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -53,9 +53,8 @@ namespace BookAuthorRelationshipOneToManyAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NumberofPages")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NumberofPages")
+                        .HasColumnType("int");
 
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");

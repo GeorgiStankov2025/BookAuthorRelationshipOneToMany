@@ -17,6 +17,20 @@ namespace BookAuthorRelationshipOneToManyAPI.Services
 
             }
 
+            else if(book.NumberofPages<=0)
+            {
+
+                return await exceptions.ErrorCreatingBook();
+
+            }
+
+            else if(book.Quantity<=0)
+            {
+
+                return await exceptions.NoQuantity();
+
+            }
+
             else if (book.Author is null)
             {
 

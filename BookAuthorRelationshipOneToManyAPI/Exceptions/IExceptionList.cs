@@ -10,6 +10,8 @@ namespace BookAuthorRelationshipOneToManyAPI.Exceptions
         Task<Book> AuthorNotFound();
         Task<Book> BookRemoved();
         Task<Book> ErrorRemovingBook();
+        Task<Book> ErrorCreatingBook();
+        Task<Book> NoQuantity();
 
     }
 }

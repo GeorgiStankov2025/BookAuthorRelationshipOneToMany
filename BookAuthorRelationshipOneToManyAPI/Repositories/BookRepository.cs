@@ -3,6 +3,7 @@ using BookAuthorRelationshipOneToManyAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookAuthorRelationshipOneToManyAPI.Exceptions;
+using System.Linq;
 
 namespace BookAuthorRelationshipOneToManyAPI.Repositories
 {
@@ -10,15 +11,8 @@ namespace BookAuthorRelationshipOneToManyAPI.Repositories
     {
         public async Task<Book> CreateBook(Book book)
         {
-            
+
            await context.Books.AddAsync(book);
-
-           if(!context.Authors.ToList().Contains(book.Author))
-           {
-
-             await context.Authors.AddAsync(book.Author);
-
-           }
 
            await context.SaveChangesAsync();
 

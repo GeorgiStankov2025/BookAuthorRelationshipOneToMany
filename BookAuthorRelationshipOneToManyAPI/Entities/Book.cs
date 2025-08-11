@@ -7,7 +7,7 @@
 
         public required string Name { get; set; }
         
-        public required string NumberofPages { get; set; }
+        public required int NumberofPages { get; set; }
        
         public required long Quantity { get; set; }
 

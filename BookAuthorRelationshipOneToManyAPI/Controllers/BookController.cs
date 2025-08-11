@@ -40,13 +40,13 @@ namespace BookAuthorRelationshipOneToManyAPI.Controllers
 
         }
 
-        [HttpGet("get-book-By-Name")]
+        [HttpGet("get-book-By-Name{Id}")]
         public async Task<ActionResult<Book>> GetBookByName(Guid Id)
         {
 
             var result = await bookServices.GetBookByNameService(Id);
 
-            if (result.GetType() == exception.BookNotFound().GetType())
+            if (result is null)
             {
 
                 return NotFound(result);
@@ -57,19 +57,12 @@ namespace BookAuthorRelationshipOneToManyAPI.Controllers
 
         }
 
-        [HttpDelete("delete-Book")]
+        [HttpDelete("delete-Book{Id}")]
 
         public async Task<ActionResult<Book>> RemoveBook(Guid Id)
         {
 
             var result= await bookServices.RemoveBookService(Id);
-
-            if(result.GetType()==exception.BookNotFound().GetType())
-            {
-
-                return NotFound(result);
-               
-            }
 
             return Ok(result);
 

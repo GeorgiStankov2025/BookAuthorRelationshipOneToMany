@@ -29,7 +29,7 @@ namespace BookAuthorRelationshipOneToManyAPI.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumberofPages = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumberofPages = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<long>(type: "bigint", nullable: false),
                     AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
